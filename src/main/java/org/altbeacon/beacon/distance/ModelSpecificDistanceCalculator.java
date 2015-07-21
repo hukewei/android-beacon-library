@@ -47,6 +47,7 @@ import java.util.Map;
 public class ModelSpecificDistanceCalculator implements DistanceCalculator {
     Map<AndroidModel,DistanceCalculator> mModelMap;
     private static final String CONFIG_FILE = "model-distance-calculations.json";
+    private static final String CONFIG_FILE_CALIBRATED = "model-distance-calculations_calibrated.json";
     private static final String TAG = "ModelSpecificDistanceCalculator";
     private AndroidModel mDefaultModel;
     private DistanceCalculator mDistanceCalculator;
@@ -147,7 +148,15 @@ public class ModelSpecificDistanceCalculator implements DistanceCalculator {
     }
 
     private boolean loadModelMapFromFile() {
-        File file = new File(mContext.getFilesDir(), CONFIG_FILE);
+        File file = null;
+        LogManager.d(TAG, "Loading model map from file");
+        if(BeaconManager.isUseCalibratedDeviceProfile()) {
+            LogManager.d(TAG, "Loading model map from CONFIG_FILE_CALIBRATED");
+            file = new File(mContext.getFilesDir(), CONFIG_FILE_CALIBRATED);
+        } else {
+            LogManager.d(TAG, "Loading model map from CONFIG_FILE");
+            file = new File(mContext.getFilesDir(), CONFIG_FILE);
+        }
         FileInputStream inputStream = null;
         BufferedReader reader = null;
         StringBuilder sb = new StringBuilder();
@@ -176,6 +185,7 @@ public class ModelSpecificDistanceCalculator implements DistanceCalculator {
             }
         }
         try {
+            LogManager.d(TAG, "Profile File content %s", sb.toString());
             buildModelMap(sb.toString());
             return true;
         } catch (JSONException e) {
@@ -265,6 +275,8 @@ public class ModelSpecificDistanceCalculator implements DistanceCalculator {
 
             CurveFittedDistanceCalculator distanceCalculator =
                     new CurveFittedDistanceCalculator(coefficient1,coefficient2,coefficient3);
+            LogManager.w(TAG, "matched profile for Android device:" + version + " - " + buildNumber + " - " + model + " - " + manufacturer);
+            LogManager.w(TAG, "Coefficents are:" + coefficient1 + " - " + coefficient2 + " - " + coefficient3 );
 
             AndroidModel androidModel = new AndroidModel(version, buildNumber, model, manufacturer);
             mModelMap.put(androidModel, distanceCalculator);
@@ -277,7 +289,13 @@ public class ModelSpecificDistanceCalculator implements DistanceCalculator {
     private void loadDefaultModelMap() {
         mModelMap = new HashMap<AndroidModel, DistanceCalculator>();
         try {
-            buildModelMap(stringFromFilePath(CONFIG_FILE));
+            if(BeaconManager.isUseCalibratedDeviceProfile()) {
+                LogManager.d(TAG, "Loading model map from CONFIG_FILE_CALIBRATED");
+                buildModelMap(stringFromFilePath(CONFIG_FILE_CALIBRATED));
+            } else {
+                LogManager.d(TAG, "Loading model map from CONFIG_FILE");
+                buildModelMap(stringFromFilePath(CONFIG_FILE));
+            }
         }
         catch (Exception e) {
             LogManager.e(e, TAG, "Cannot build model distance calculations");

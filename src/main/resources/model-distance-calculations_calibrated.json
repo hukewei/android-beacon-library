@@ -1,0 +1,42 @@
+{
+  "models":
+  [
+    {
+      "coefficient1": 0.42093,
+      "coefficient2": 6.9476,
+      "coefficient3": 0.54992,
+      "version":"4.4.2",
+      "build_number":"KOT49H",
+      "model":"Nexus 4",
+      "manufacturer":"LGE"
+    },
+    {
+      "coefficient1": 0.42093,
+      "coefficient2": 6.9476,
+      "coefficient3": 0.54992,
+      "version":"4.4.2",
+      "build_number":"LPV79",
+      "model":"Nexus 5",
+      "manufacturer":"LGE",
+      "default": true
+    },
+    {
+      "coefficient1": -0.4150306,
+      "coefficient2": 1.9247993,
+      "coefficient3": 6.1033180,
+      "version":"4.4.4",
+      "build_number":"KTU84P",
+      "model":"GT-I9305",
+      "manufacturer":"SAMSUNG"
+    },
+    {
+      "coefficient1": 2.2652395,
+      "coefficient2": 0.3177642,
+      "coefficient3": 9.3759462,
+      "version":"5.0.1",
+      "build_number":"LRX22C",
+      "model":"SM-N910F",
+      "manufacturer":"SAMSUNG"
+    }
+  ]
+}

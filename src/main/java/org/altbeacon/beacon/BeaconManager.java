@@ -119,6 +119,7 @@ public class BeaconManager {
 
     private static boolean sAndroidLScanningDisabled = false;
     private static boolean sManifestCheckingDisabled = false;
+    private static boolean useCalibratedDeviceProfile = false;
 
     /**
      * Set to true if you want to show library debugging.
@@ -161,6 +162,14 @@ public class BeaconManager {
     private long foregroundBetweenScanPeriod = DEFAULT_FOREGROUND_BETWEEN_SCAN_PERIOD;
     private long backgroundScanPeriod = DEFAULT_BACKGROUND_SCAN_PERIOD;
     private long backgroundBetweenScanPeriod = DEFAULT_BACKGROUND_BETWEEN_SCAN_PERIOD;
+
+    public static boolean isUseCalibratedDeviceProfile() {
+        return useCalibratedDeviceProfile;
+    }
+
+    public static void setUseCalibratedDeviceProfile(boolean CalibratedDeviceProfile) {
+        useCalibratedDeviceProfile = CalibratedDeviceProfile;
+    }
 
     /**
      * Sets the duration in milliseconds of each Bluetooth LE scan cycle to look for beacons.
