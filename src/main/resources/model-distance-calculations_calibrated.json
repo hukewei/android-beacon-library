@@ -30,9 +30,9 @@
       "manufacturer":"SAMSUNG"
     },
     {
-      "coefficient1": 2.2652395,
-      "coefficient2": 0.3177642,
-      "coefficient3": 9.3759462,
+      "coefficient1": 0.3177642,
+      "coefficient2": 9.3759462,
+      "coefficient3": 2.2652395,
       "version":"5.0.1",
       "build_number":"LRX22C",
       "model":"SM-N910F",
