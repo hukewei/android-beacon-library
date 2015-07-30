@@ -21,9 +21,9 @@
       "default": true
     },
     {
-      "coefficient1": -0.4150306,
-      "coefficient2": 1.9247993,
-      "coefficient3": 6.1033180,
+      "coefficient1": 3.034807,
+      "coefficient2": 6.195116,
+      "coefficient3": -1.564327,
       "version":"4.4.4",
       "build_number":"KTU84P",
       "model":"GT-I9305",
